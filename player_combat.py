@@ -29,7 +29,7 @@ class Player:
             self.max_exp += 100
             self.health = self.max_health
             self.font=pygame.font.SysFont("Verdana",20)
-            self.text_rendering=self.font.render("Your level becomes level {}".format(self.level),True,(255,255,255))
+            self.text_rendering=self.font.render("Your level becomes level {}".format(self.level),True,(0,0,0))
             self.blitme=screen.blit(self.text_rendering,(500,450))
 # Warrior object
 class Warrior(Player):

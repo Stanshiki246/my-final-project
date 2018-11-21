@@ -16,6 +16,7 @@ Red=(255,0,0)
 Gray=(235,235,235)
 Yellow=(255,255,0)
 Blue=(0,0,255)
+Black=(0,0,0)
 # NPC Shopkeeper
 merchant=pygame.image.load("textures\\merchant.png")
 merchant=pygame.transform.scale(merchant,(300,300))
@@ -250,12 +251,12 @@ def LoadMenu():
     pygame.display.update()
 #Function to show help
 def HelpScene():
-    howtoplay=font_status_monster.render("How To Play",True,Yellow)
-    enterkey=font_status_player.render("Press Enter to skip scene",True,Yellow)
-    quitkey=font_status_player.render("Press Q to quit game",True,Yellow)
-    zkey=font_status_player.render("Press Z to attack (Dungeon and Boss Fight Only)",True,Yellow)
-    xkey=font_status_player.render("Press X to use potion (Dungeon and Boss Fight Only)",True,Yellow)
-    ckey=font_status_player.render("Press C to flee (Dungeon Only)",True,Yellow)
+    howtoplay=font_status_monster.render("How To Play",True,Black)
+    enterkey=font_status_player.render("Press Enter to skip scene",True,Black)
+    quitkey=font_status_player.render("Press Q to quit game",True,Black)
+    zkey=font_status_player.render("Press Z to attack (Dungeon and Boss Fight Only)",True,Black)
+    xkey=font_status_player.render("Press X to use potion (Dungeon and Boss Fight Only)",True,Black)
+    ckey=font_status_player.render("Press C to flee (Dungeon Only)",True,Black)
     #Get RGBA color mode
     s = pygame.Surface((window_width,window_height),pygame.SRCALPHA)
     s.fill((255,255,255,10))
@@ -449,10 +450,10 @@ def WinScene():
     p1.gold += GetGold
     pygame.mixer.music.load("music_and_sfx\\Victory.mid")
     pygame.mixer.music.play()
-    victory=font_status_player.render("You Win!",True,WHITE)
-    ExpPoint=font_status_player.render("You get {} EXP".format(GetExp),True,WHITE)
-    GoldPoint=font_status_player.render("You get {} Gold".format(GetGold),True,WHITE)
-    EnterKey=font_status_monster.render("Press Enter to return stage selection",True,WHITE)
+    victory=font_status_player.render("You Win!",True,Black)
+    ExpPoint=font_status_player.render("You get {} EXP".format(GetExp),True,Black)
+    GoldPoint=font_status_player.render("You get {} Gold".format(GetGold),True,Black)
+    EnterKey=font_status_monster.render("Press Enter to return stage selection",True,Black)
     window.blit(s,(0,0))
     window.blit(victory,(500,300))
     window.blit(ExpPoint,(500,350))
@@ -1272,6 +1273,7 @@ while isRunning:
                     pygame.mixer.music.play(-1)
                 elif setting_combat.scene == "victory" and setting_combat.bg_scene == "dark castle 2":
                     setting_combat.scene = "combat_stage"
+                    setting_combat.bg_scene= "dark castle"
                     setting_combat.bossmode=False
                     pygame.mixer.music.load("music_and_sfx\\dark_castle.mp3")
                     pygame.mixer.music.set_volume(0.7)
@@ -1923,12 +1925,6 @@ while isRunning:
     elif setting_combat.scene == "combat" and setting_combat.bg_scene == "dark castle 3":
         Combat(dark_castle_bg3)
     if setting_combat.scene == "combat_stage" and setting_combat.bg_scene == "dark castle":
-        setting_combat.battle = False
-        Stage_Selection(dark_castle_bg)
-    elif setting_combat.scene == "combat_stage" and setting_combat.bg_scene == "dark castle 2":
-        setting_combat.battle = False
-        Stage_Selection(dark_castle_bg)
-    elif setting_combat.scene == "combat_stage" and setting_combat.bg_scene == "dark castle 3":
         setting_combat.battle = False
         Stage_Selection(dark_castle_bg)
     # World Map

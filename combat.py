@@ -116,11 +116,11 @@ def Intro():
     pygame.display.update()
 #Function to show ending after final boss is defeated
 def Ending():
-    ending1=font_status_monster.render("Congratulations!",True,Yellow)
-    ending2=font_status_player.render("You have defeated the Demon King and retrieve our four crytals back",True,Yellow)
-    ending3=font_status_player.render("Also, you will promoted by the King as General of his armies",True,Yellow)
-    ending4=font_status_player.render("Thank you for playing it",True,Yellow)
-    skip=font_status_player.render("Press Enter to continue",True,Yellow)
+    ending1=font_status_monster.render("Congratulations!",True,Black)
+    ending2=font_status_player.render("You have defeated the Demon King and retrieve our four crytals back",True,Black)
+    ending3=font_status_player.render("Also, you will promoted by the King as General of his armies",True,Black)
+    ending4=font_status_player.render("Thank you for playing it",True,Black)
+    skip=font_status_player.render("Press Enter to continue",True,Black)
     window.blit(MenuBg,(0,0))
     window.blit(ending1,(500,200))
     window.blit(ending2,(300,300))
@@ -1199,9 +1199,6 @@ while isRunning:
                 #to quit from world,inn, or combat stages
                 elif setting_combat.scene == "combat_stage" or setting_combat.scene == "world" or setting_combat.scene == "inn":
                     sys.exit()
-                #to quit from credit
-                elif setting_combat.scene == "credit" and setting_combat.bg_scene == "credit":
-                    sys.exit()
             # Button to skip scene
             elif event.key ==  pygame.K_RETURN:
                 #If it is in victory scene, it will return to combat stage selection based on specific area
@@ -1349,6 +1346,63 @@ while isRunning:
                     setting_combat.scene = "world"
                     setting_combat.bg_scene = "world"
                     pygame.mixer.music.load("music_and_sfx\\world.mp3")
+                    pygame.mixer.music.set_volume(0.7)
+                    pygame.mixer.music.play(-1)
+                # From credit to menu and reset all progresses
+                elif setting_combat.scene == "credit" and setting_combat.bg_scene == "credit":
+                    setting_combat.bg_scene = "menu"
+                    setting_combat.scene = "menu"
+                    setting_combat.chapter1=0
+                    setting_combat.chapter2=0
+                    setting_combat.chapter3=0
+                    setting_combat.chapter4=0
+                    setting_combat.chapter5=0
+                    setting_combat.chapter6=0
+                    setting_combat.midboss=1
+                    setting_combat.finalboss=0
+                    setting_combat.playerselect=True
+                    eagle.health=eagle.max_health
+                    golem.health=golem.max_health
+                    leviathan.health=leviathan.max_health
+                    skeletonKing.health=skeletonKing.max_health
+                    dragon.health=dragon.max_health
+                    darkLeviathan.health=darkLeviathan.max_health
+                    demonKing.health=demonKing.max_health
+                    pygame.mouse.set_visible(True)
+                    if p1.job == "Warrior":
+                        warrior.max_health = 150
+                        warrior.health = 150
+                        warrior.level = 1
+                        warrior.exp = 0
+                        warrior.max_exp = 100
+                        warrior.crit_atk = 2.0
+                        warrior.potion = 1
+                        warrior.gold = 0
+                        warrior.basedamage = 2
+                        warrior.damage = 10
+                    elif p1.job == "Rogue":
+                        rogue.max_health = 75
+                        rogue.health = 75
+                        rogue.level = 1
+                        rogue.exp = 0
+                        rogue.max_exp = 100
+                        rogue.crit_atk = 2.0
+                        rogue.potion = 1
+                        rogue.gold = 0
+                        rogue.basedamage = 4
+                        rogue.damage = 20
+                    elif p1.job == "Archer":
+                        archer.max_health = 100
+                        archer.health = 100
+                        archer.level = 1
+                        archer.exp = 0
+                        archer.max_exp = 100
+                        archer.crit_atk = 2.0
+                        archer.potion = 1
+                        archer.gold = 0
+                        archer.basedamage = 3
+                        archer.damage = 15
+                    pygame.mixer.music.load("music_and_sfx\\menu.mp3")
                     pygame.mixer.music.set_volume(0.7)
                     pygame.mixer.music.play(-1)
         # Mouse gets pressed
